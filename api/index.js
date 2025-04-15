@@ -17,6 +17,7 @@ mongoose.connect(MONGO_KEY)
 
 const app = express();
 
+
 app.use('/api/user', userRroutes);
 app.use('/api/auth', authRoutes);
 
