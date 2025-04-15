@@ -1,7 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
-mongoose.connect('mongodb+srv://zaidkhan:zaidkhan@mern-blog.tngdpp0.mongodb.net/?retryWrites=true&w=majority&appName=mern-blog')
+dotenv.config();
+
+const MONGO_KEY = process.env.MONGO;
+
+mongoose.connect(MONGO_KEY)
     .then(() => {
         console.log('MongoDb is connected');
     })
