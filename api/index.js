@@ -21,6 +21,24 @@ app.use(express.json())
 app.use('/api/user', userRroutes);
 app.use('/api/auth', authRoutes);
 
+
+app.use((err, req, res, next) => {
+    const StatusCode = err.StatusCode || 500;
+    const message = err.message || "Internal Server Error";
+
+    res.status(StatusCode).json({
+        success: false,
+        StatusCode,
+        message
+    })
+})
+
+// Middlewere is a simple function that has ability to handle request and response objects in a server. 
+// Middleware can be is used while -
+// Execution of any type of code during updation of request and response objects
+// during the completion of request response iterations
+// Through this we can call the next middleware also
+
 app.listen(3000, () => {
     console.log('Server is running on 3000!')
 })
