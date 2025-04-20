@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
+import OAuth from '../Components/OAuth'
 
 const SignIn = () => {
 
@@ -110,9 +111,13 @@ const SignIn = () => {
                 ) : "Sign In"
               }
             </Button>
+            
+            {/* Google Sign-up Button */}
+            <OAuth />
+
           </form>
           <div className='flex gap-2 text-sm mt-5'>
-            <span>Dont Have an account?</span>
+            <span>Don't Have an account?</span>
             <Link to='/sign-up' className='text-blue-500'>Sign Up</Link>
           </div>
           {
