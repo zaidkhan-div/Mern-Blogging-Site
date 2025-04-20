@@ -1,14 +1,19 @@
 import { Alert, Button, Label, Spinner, TextInput } from 'flowbite-react'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
 
 const SignIn = () => {
 
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  // const [errorMessage, setErrorMessage] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector(state => state.user)
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const handChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
@@ -18,11 +23,13 @@ const SignIn = () => {
   const handeSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage('Please fill out all the fields.')
+      return dispatch(signInFailure('Please fill out all the fields.'));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null)
+      // setLoading(true);
+      // setErrorMessage(null) // instead we can React-redux
+
+      dispatch(signInStart());
 
       const res = await fetch('/api/auth/signin', {
         method: 'POST',
@@ -33,18 +40,21 @@ const SignIn = () => {
       const data = await res.json();
 
       if (data.success === false) {
-        return setErrorMessage(data.message);
+        // return setErrorMessage(data.message);
+        dispatch(signInFailure(data.message))
       }
 
-      setLoading(false);
+      // setLoading(false);
 
       if (res.ok) {
+        dispatch(signInSuccess(data))
         navigate('/')
       }
 
     } catch (error) {
-      setErrorMessage(error.message)
-      setLoading(false)
+      // setErrorMessage(error.message)
+      // setLoading(false)
+      dispatch(signInFailure(error.message))
     }
 
   }
@@ -94,10 +104,10 @@ const SignIn = () => {
               {
                 loading ? (
                   <>
-                    < Spinner siz='sm' />
+                    < Spinner size='sm' />
                     <span className='pl-3'>Loadin...</span>
                   </>
-                ) : "Sign Ip"
+                ) : "Sign In"
               }
             </Button>
           </form>
