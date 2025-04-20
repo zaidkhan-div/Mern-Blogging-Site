@@ -21,7 +21,7 @@ export const signup = async (req, res, next) => {
 
     try {
         await newUser.save()
-        res.json("Signup succesfully")
+        res.status(201).json({ message: "Signup successfully" });
     } catch (error) {
         // res.status(500).json({ message: error.message })
         next(error);
@@ -50,12 +50,11 @@ export const signin = async (req, res, next) => {
 
         const token = jwt.sign({ id: ValidUser._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
 
+        const { password: pass, ...rest } = ValidUser._doc;
 
         res.status(200).cookie('access_token', token, {
             httpOnly: true
-        }).json(ValidUser)
-
-
+        }).json(rest)
 
     } catch (error) {
         next(error)

@@ -60,7 +60,8 @@ const SignUp = () => {
             Blog
           </Link>
           <p className='text-sm mt-5'>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repudiandae fuga commodi, eaque, deleniti accusamus in blanditiis eos neque architecto, molestias laudantium ab! Ducimus, libero soluta!
+            This is a demo project. You can sign up with your email and password
+            or with Google.
           </p>
         </div>
         {/* Right */}
