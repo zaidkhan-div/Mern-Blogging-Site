@@ -7,7 +7,8 @@ import SignIn from './Pages/SignIn'
 import SignUp from './Pages/SignUp'
 import Dashboard from './Pages/Dashboard'
 import Header from './Components/Header'
-import FooterComp  from './Components/Footer'
+import FooterComp from './Components/Footer'
+import ProtecttedRoute from './Components/ProtectedRoute'
 
 
 const App = () => {
@@ -20,7 +21,9 @@ const App = () => {
         <Route path='/projects' element={<Projects />} />
         <Route path='/sign-in' element={<SignIn />} />
         <Route path='/sign-up' element={<SignUp />} />
-        <Route path='/dashboard' element={<Dashboard />} />
+        <Route element={<ProtecttedRoute/>}>
+          <Route path='/dashboard' element={<Dashboard />} />
+        </Route>
       </Routes>
       <FooterComp />
     </BrowserRouter>
