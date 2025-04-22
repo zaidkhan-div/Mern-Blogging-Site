@@ -3,6 +3,7 @@ import { Sidebar } from 'flowbite-react'
 import { HiUser, HiArrowSmRight } from 'react-icons/hi'
 import { Link, useLocation } from 'react-router-dom'
 
+
 const DashSidebar = () => {
     const location = useLocation();
     const [tab, setTab] = useState();
