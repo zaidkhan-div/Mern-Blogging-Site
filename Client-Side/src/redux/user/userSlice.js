@@ -10,7 +10,7 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        signInStart: (state) => {   
+        signInStart: (state) => {
             state.loading = true;
             state.error = null;
         },
@@ -22,9 +22,22 @@ const userSlice = createSlice({
         signInFailure: (state, action) => {
             state.loading = false;
             state.error = action.payload;
+        },
+        updateStart: (state) => {
+            state.loading = true;
+            state.error = null;
+        },
+        updateSuccess: (state, action) => {
+            state.currentUser = action.payload;
+            state.laoder = false;
+            state.error = null;
+        },
+        updateFailure: (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
         }
     }
 })
 
-export const { signInStart, signInSuccess, signInFailure } = userSlice.actions;
+export const { signInStart, signInSuccess, signInFailure, updateStart, updateFailure, updateSuccess } = userSlice.actions;
 export default userSlice.reducer;// Default export so there we import can change the name
