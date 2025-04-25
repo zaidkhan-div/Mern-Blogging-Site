@@ -53,6 +53,7 @@ const DashProfile = () => {
         setFormData({ ...formData, profilePicture: urlData.publicUrl });
     };
 
+    const handleChange = () => { }
 
     // console.log(imageFile);
     // console.log('This is image Url ' + imageUrl);
@@ -75,9 +76,12 @@ const DashProfile = () => {
                             {imageFileUploadError}
                         </Alert>
                     }
-                    <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username} />
-                    <TextInput type='text' id='email' placeholder='email' defaultValue={currentUser.email} />
-                    <TextInput type='text' id='password' placeholder='password' />
+                    <TextInput type='text' id='username' placeholder='username' defaultValue={currentUser.username}
+                        onChange={handleChange} />
+                    <TextInput type='text' id='email' placeholder='email' defaultValue={currentUser.email}
+                        onChange={handleChange} />
+                    <TextInput type='text' id='password' placeholder='password'
+                        onChange={handleChange} />
                     <Button type='submit' gradientDuoTone='purpleToPink' outline>Update</Button>
                 </form>
                 <div className='text-red-500 flex justify-between mt-5'>
